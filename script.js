@@ -31,6 +31,7 @@ console.log(myLibrary);
 button.addEventListener('click', () => {
     const title = titleInput.value;
     const author = authorInput.value;
+    bookList.innerHTML = '';
     addBookToLibrary(title,author);
     titleInput.value = '';
     authorInput.value = '';
