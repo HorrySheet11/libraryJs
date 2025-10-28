@@ -8,28 +8,33 @@ const addBookDialog = document.getElementById('addBookDialog');
 
 const authorInput = document.getElementById('authorName');
 const titleInput = document.getElementById('bookName');
+const pageCount = document.getElementById('pageCount');
+const readStatus = document.getElementById('readYes');
 
 if (bookList.innerHTML == '') {
     bookList.innerHTML = '<p>No books in library</p>';
 }
 
-function Book(title,author) {
+function Book(title,author,pages, read) {
     this.title = title;
     this.author = author;
+    this.pages = pages
+    this.read = read
     this.id = crypto.randomUUID();
 }
 
-function addBookToLibrary(title, author) {
-    if (title === '' || author === '') {
-        alert('Please enter both title and author');
+function addBookToLibrary(title, author, pages, readStatus) {
+    if (title === '' || author === '' || pages === '') {
+        alert('Please enter all book information.');
         return;
     }
-    const newBook = new Book(title,author);
+    readStatus.value == 'Yes' ? readStatus : readStatus = 'No';
+    const newBook = new Book(title,author,pages,readStatus);
     myLibrary.push(newBook);
     myLibrary.map(book => { 
         const newBook = document.createElement('div');
         newBook.classList.add('book');
-        newBook.innerHTML = `<h3>${book.title}</h3><p>By: ${book.author}</p>`;
+        newBook.innerHTML = `<h3>${book.title}</h3><p>By: ${book.author}</p><p>Pages: ${book.pages}</p><p>Read: ${book.read}</p>`;
         bookList.appendChild(newBook);
     });
     addBookDialog.close();
@@ -38,16 +43,18 @@ function addBookToLibrary(title, author) {
 // addBookToLibrary("1984","George Orwell");
 // addBookToLibrary("To Kill a Mockingbird","Harper Lee");
 
-console.log(myLibrary);
 
 button.addEventListener('click', () => {
     const title = titleInput.value;
     const author = authorInput.value;
+    const pages = pageCount.value;
+    const read = readStatus.value;
     bookList.innerHTML = '';
-    addBookToLibrary(title,author);
+    addBookToLibrary(title,author,pages,read);
     titleInput.value = '';
     authorInput.value = '';
-    
+    pageCount.value = '';
+    readStatus.value = '';
 });
 
 addNewBook.addEventListener('click', () => {

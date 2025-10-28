@@ -22,7 +22,6 @@ body {
 
 .book {
   width: 200px;
-  height: 100px;
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
@@ -30,8 +29,12 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 10px;
+  gap: 5px;
   transition: transform 0.3s, box-shadow 0.3s;
+  p{
+    margin:0;
+  }
+  padding:10px
 }
 
 #bookList {
@@ -43,14 +46,13 @@ body {
   justify-content: center;
 }
 
-input {
+input:not([type="radio"]), select, textarea {
   font-family: inherit;
   padding: 3px;
   margin: 5px auto;
   display: block;
   border-radius: 5px;
   border: 1px solid grey;
-
 }
 
 #addBookBtn, #addNewBook{
@@ -62,7 +64,9 @@ input {
     background-color:#4CAF50;
     color:white;
     cursor:pointer;
-    margin:10px;
+    margin:10px auto;
+    display:block
+
 }
 
 dialog[open] {
@@ -76,4 +80,12 @@ dialog[open] {
   100%{
     opacity:1;
   }
+}
+
+legend{
+    display:block;
+}
+
+.checkboxLabel{
+    display:inline;
 }
