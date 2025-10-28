@@ -19,6 +19,15 @@ body {
   align-items: center;
   gap: 20px;
 }
+.library{
+    min-width:300px;
+    height: auto;
+    background-color:rgb(242, 241, 241);
+    border:none;
+    padding:20px;
+    border-radius:8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
 .book {
   width: 200px;
@@ -55,7 +64,7 @@ input:not([type="radio"]), select, textarea {
   border: 1px solid grey;
 }
 
-#addBookBtn, #addNewBook{
+#addBookBtn, #addNewBook, .removeBtn{
     padding:5px 40px;
     font-size:16px;
     font-family:inherit;
@@ -66,8 +75,21 @@ input:not([type="radio"]), select, textarea {
     cursor:pointer;
     margin:10px auto;
     display:block
-
 }
+
+.removeBtn{
+    padding:5px 20px;
+    background-color:#f44336;
+    display:none;
+    transition: all 0.3s ease;
+}
+
+.book:hover{
+    height:auto;
+    .removeBtn{
+    display:block;
+    }
+} 
 
 dialog[open] {
   animation: fadeIn 0.2s ease-in forwards;

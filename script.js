@@ -28,21 +28,38 @@ function addBookToLibrary(title, author, pages, readStatus) {
         alert('Please enter all book information.');
         return;
     }
-    readStatus.value == 'Yes' ? readStatus : readStatus = 'No';
+    readStatus == 'Yes' ? readStatus: readStatus = 'No' ;
     const newBook = new Book(title,author,pages,readStatus);
     myLibrary.push(newBook);
     myLibrary.map(book => { 
         const newBook = document.createElement('div');
         newBook.classList.add('book');
-        newBook.innerHTML = `<h3>${book.title}</h3><p>By: ${book.author}</p><p>Pages: ${book.pages}</p><p>Read: ${book.read}</p>`;
+        newBook.innerHTML = `<h3>${book.title}</h3>
+        <p>By: ${book.author}</p>
+        <p>Pages: ${book.pages}</p>
+        <p>Read: ${book.read}</p>
+        <button class="removeBtn" onclick="console.log(Array.from(this.parentElement.parentElement.children).indexOf(this))">Remove Book</button>
+        `;
         bookList.appendChild(newBook);
     });
     addBookDialog.close();
 }
 
-// addBookToLibrary("1984","George Orwell");
-// addBookToLibrary("To Kill a Mockingbird","Harper Lee");
-
+function removeBook(index) {   
+    myLibrary.splice(index, 1);
+    bookList.innerHTML = '';
+    myLibrary.map(book => { 
+        const newBook = document.createElement('div');
+        newBook.classList.add('book');
+        newBook.innerHTML = `<h3>${book.title}</h3> 
+        <p>By: ${book.author}</p>
+        <p>Pages: ${book.pages}</p>
+        <p>Read: ${book.read}</p>
+        <button class="removeBtn" onclick="removeBook(this.parentElement.indexOf(this))">Remove Book</button>
+        `;
+        bookList.appendChild(newBook);
+    });
+}
 
 button.addEventListener('click', () => {
     const title = titleInput.value;
