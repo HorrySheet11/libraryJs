@@ -1,0 +1,66 @@
+html {
+  box-sizing: border-box;
+  font-family: century-gothic, sans-serif;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+body {
+  margin: 0;
+  padding: 10px;
+  background-color: #ebeef0;
+  text-align: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.book {
+  width: 200px;
+  height: 100px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+#bookList {
+  margin: 10px;
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+input {
+  font-family: inherit;
+  padding: 3px;
+  margin: 5px auto;
+  display: block;
+  border-radius: 5px;
+  border: 1px solid grey;
+
+}
+
+#addBookBtn{
+    padding:5px 40px;
+    font-size:16px;
+    font-family:inherit;
+    border-radius:8px;
+    border:none;
+    background-color:#4CAF50;
+    color:white;
+    cursor:pointer;
+    margin:10px;
+}

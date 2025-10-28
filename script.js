@@ -12,13 +12,17 @@ function Book(title,author) {
     this.id = crypto.randomUUID();
 }
 
-function addBookToLibrary(title,author) {
+function addBookToLibrary(title, author) {
+    if (title === '' || author === '') {
+        alert('Please enter both title and author');
+        return;
+    }
     const newBook = new Book(title,author);
     myLibrary.push(newBook);
     myLibrary.map(book => { 
         const newBook = document.createElement('div');
         newBook.classList.add('book');
-        newBook.innerHTML = `<h3>${book.title}</h3><p>${book.author}</p>`;
+        newBook.innerHTML = `<h3>${book.title}</h3><p>By: ${book.author}</p>`;
         bookList.appendChild(newBook);
     });
 }
