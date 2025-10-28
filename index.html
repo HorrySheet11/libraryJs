@@ -10,12 +10,13 @@
   <body>
     <div>
       <h1>My Library</h1>
-      <label> Book Title: <input type="text" id="bookName" /></label>
-      <label> Book Author: <input type="text" id="authorName" /></label>
-      <button id="addBookBtn" >Add Book</button>
-      <div id="bookList">
-
-      </div>
+      <button id="addNewBook">New Book</button>
+      <dialog id="addBookDialog">
+        <label> Book Title: <input type="text" id="bookName" /></label>
+        <label> Book Author: <input type="text" id="authorName" /></label>
+        <button id="addBookBtn">Add Book</button>
+      </dialog>
+      <div id="bookList"></div>
     </div>
   </body>
   <script src="script.js"></script>

@@ -3,8 +3,15 @@ const myLibrary = [];
 const bookList = document.getElementById('bookList');
 const button = document.getElementById('addBookBtn');
 
+const addNewBook = document.getElementById('addNewBook');
+const addBookDialog = document.getElementById('addBookDialog');
+
 const authorInput = document.getElementById('authorName');
 const titleInput = document.getElementById('bookName');
+
+if (bookList.innerHTML == '') {
+    bookList.innerHTML = '<p>No books in library</p>';
+}
 
 function Book(title,author) {
     this.title = title;
@@ -25,6 +32,7 @@ function addBookToLibrary(title, author) {
         newBook.innerHTML = `<h3>${book.title}</h3><p>By: ${book.author}</p>`;
         bookList.appendChild(newBook);
     });
+    addBookDialog.close();
 }
 
 // addBookToLibrary("1984","George Orwell");
@@ -39,4 +47,9 @@ button.addEventListener('click', () => {
     addBookToLibrary(title,author);
     titleInput.value = '';
     authorInput.value = '';
+    
 });
+
+addNewBook.addEventListener('click', () => {
+    addBookDialog.showModal();
+}   );

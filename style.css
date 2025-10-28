@@ -53,7 +53,7 @@ input {
 
 }
 
-#addBookBtn{
+#addBookBtn, #addNewBook{
     padding:5px 40px;
     font-size:16px;
     font-family:inherit;
@@ -63,4 +63,17 @@ input {
     color:white;
     cursor:pointer;
     margin:10px;
+}
+
+dialog[open] {
+  animation: fadeIn 0.2s ease-in forwards;
+}
+
+@keyframes fadeIn{
+  0%{
+    opacity:0;
+  }
+  100%{
+    opacity:1;
+  }
 }
