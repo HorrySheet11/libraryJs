@@ -9,7 +9,7 @@ const addBookDialog = document.getElementById("addBookDialog");
 const authorInput = document.getElementById("authorName");
 const titleInput = document.getElementById("bookName");
 const pageCount = document.getElementById("pageCount");
-const readStatus = document.getElementById("readYes");
+const readRadio = document.querySelector('input[name="ReadStatus"]:checked');
 
 if (bookList.innerHTML == "") {
   bookList.innerHTML = "<p>No books in library</p>";
@@ -23,20 +23,31 @@ function Book(title, author, pages, read) {
   this.id = crypto.randomUUID();
 }
 
+function thisIndex(theIndex) {
+  return Array.from(theIndex.parentElement.parentElement).indexOf(
+    theIndex.parentElement
+  );
+}
+
 function createBook() {
-    myLibrary.map((book) => {
+  myLibrary.map((book) => {
     const newBook = document.createElement("div");
     newBook.classList.add("book");
     newBook.innerHTML = `<h3>${book.title}</h3> 
-        <p>By: ${book.author}</p>
-        <p>Pages: ${book.pages}</p>
-        <button onclick="book.changeReadStatus()">Read: ${book.read}</button>
-        <button class="removeBtn" onclick="removeBook(Array.from(this.parentElement.parentElement).indexOf(this.parentElement
-        ))">Remove Book</button>
-        `;
+      <p>By: ${book.author}</p>
+      <p>Pages: ${book.pages}</p>
+      <button class="readBtn ${
+        book.read == "Yes" ? "read" : "notRead"
+      }" onclick="changeReadStatus(thisIndex(this))">Read: ${book.read}</button>
+      <button class="removeBtn" onclick="console.log(thisIndex(this)); removeBook(thisIndex(this))">Remove Book</button>
+      `;
     bookList.appendChild(newBook);
-    });
-    return bookList;
+  });
+  if (bookList.innerHTML == "") {
+    bookList.innerHTML = "<p>No books in library</p>";
+  }
+  console.log(myLibrary);
+  return bookList;
 }
 
 function addBookToLibrary(title, author, pages, readStatus) {
@@ -44,72 +55,43 @@ function addBookToLibrary(title, author, pages, readStatus) {
     alert("Please enter all book information.");
     return;
   }
-  readStatus == "Yes" ? readStatus : (readStatus = "No");
+
+  // readStatus.hasAttribute("checked") ? readStatus = "Yes" : readStatus = "No";
   const newBook = new Book(title, author, pages, readStatus);
   myLibrary.push(newBook);
-  myLibrary.map((book) => {
-    const newBook = document.createElement("div");
-    newBook.classList.add("book");
-    newBook.propertyIndex = myLibrary.indexOf(book);
-    newBook.innerHTML = `<h3>${book.title}</h3>
-        <p>By: ${book.author}</p>
-        <p>Pages: ${book.pages}</p>
-        <p>Read: ${book.read}</p>
-        <button class="removeBtn" onclick="removeBook(Array.from(this.parentElement.parentElement).indexOf(this.parentElement
-        ))">Remove Book</button>
-        `;
-    bookList.appendChild(newBook);
-  });
+  createBook();
   addBookDialog.close();
 }
 
 function removeBook(index) {
   myLibrary.splice(index, 1);
   bookList.innerHTML = "";
-  myLibrary.map((book) => {
-    const newBook = document.createElement("div");
-    newBook.classList.add("book");
-    newBook.innerHTML = `<h3>${book.title}</h3> 
-        <p>By: ${book.author}</p>
-        <p>Pages: ${book.pages}</p>
-        <button onclick="book.changeReadStatus()">Read: ${book.read}</button>
-        <button class="removeBtn" onclick="removeBook(Array.from(this.parentElement.parentElement).indexOf(this.parentElement
-        ))">Remove Book</button>
-        `;
-    bookList.appendChild(newBook);
-  });
+  createBook();
 }
 
 button.addEventListener("click", () => {
   const title = titleInput.value;
   const author = authorInput.value;
   const pages = pageCount.value;
-  const read = readStatus.value;
+  const read = readRadio.value;
   bookList.innerHTML = "";
   addBookToLibrary(title, author, pages, read);
-  titleInput.value = "";
-  authorInput.value = "";
-  pageCount.value = "";
-  readStatus.value = "";
+  titleInput.value =
+    authorInput.value =
+    pageCount.value =
+    readRadio.value =
+      "";
 });
 
 addNewBook.addEventListener("click", () => {
   addBookDialog.showModal();
 });
 
-Book.prototype.changeReadStatus = function () {
-  this.read = this.read === "Yes" ? "No" : "Yes";
+function changeReadStatus(index) {
+  console.log(index);
+  console.log(myLibrary[index].read);
+  myLibrary[index].Book.read =
+    myLibrary[index].Book.read === "Yes" ? "No" : "Yes";
   bookList.innerHTML = "";
-  myLibrary.map((book) => {
-    const newBook = document.createElement("div");
-    newBook.classList.add("book");
-    newBook.innerHTML = `<h3>${book.title}</h3> 
-        <p>By: ${book.author}</p>
-        <p>Pages: ${book.pages}</p>
-        <button onclick="book.changeReadStatus()">Read: ${book.read}</button>
-        <button class="removeBtn" onclick="removeBook(Array.from(this.parentElement.parentElement).indexOf(this.parentElement
-        ))">Remove Book</button>
-        `;
-    bookList.appendChild(newBook);
-  });
+  createBook();
 }
