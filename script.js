@@ -1,79 +1,82 @@
 const myLibrary = [];
 
-const bookList = document.getElementById('bookList');
-const button = document.getElementById('addBookBtn');
+const bookList = document.getElementById("bookList");
+const button = document.getElementById("addBookBtn");
 
-const addNewBook = document.getElementById('addNewBook');
-const addBookDialog = document.getElementById('addBookDialog');
+const addNewBook = document.getElementById("addNewBook");
+const addBookDialog = document.getElementById("addBookDialog");
 
-const authorInput = document.getElementById('authorName');
-const titleInput = document.getElementById('bookName');
-const pageCount = document.getElementById('pageCount');
-const readStatus = document.getElementById('readYes');
+const authorInput = document.getElementById("authorName");
+const titleInput = document.getElementById("bookName");
+const pageCount = document.getElementById("pageCount");
+const readStatus = document.getElementById("readYes");
 
-if (bookList.innerHTML == '') {
-    bookList.innerHTML = '<p>No books in library</p>';
+if (bookList.innerHTML == "") {
+  bookList.innerHTML = "<p>No books in library</p>";
 }
 
-function Book(title,author,pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages
-    this.read = read
-    this.id = crypto.randomUUID();
+function Book(title, author, pages, read) {
+  this.title = title;
+  this.author = author;
+  this.pages = pages;
+  this.read = read;
+  this.id = crypto.randomUUID();
 }
 
 function addBookToLibrary(title, author, pages, readStatus) {
-    if (title === '' || author === '' || pages === '') {
-        alert('Please enter all book information.');
-        return;
-    }
-    readStatus == 'Yes' ? readStatus: readStatus = 'No' ;
-    const newBook = new Book(title,author,pages,readStatus);
-    myLibrary.push(newBook);
-    myLibrary.map(book => { 
-        const newBook = document.createElement('div');
-        newBook.classList.add('book');
-        newBook.innerHTML = `<h3>${book.title}</h3>
+  if (title === "" || author === "" || pages === "") {
+    alert("Please enter all book information.");
+    return;
+  }
+  readStatus == "Yes" ? readStatus : (readStatus = "No");
+  const newBook = new Book(title, author, pages, readStatus);
+  myLibrary.push(newBook);
+  myLibrary.map((book) => {
+    const newBook = document.createElement("div");
+    newBook.classList.add("book");
+    newBook.propertyIndex = myLibrary.indexOf(book);
+    newBook.innerHTML = `<h3>${book.title}</h3>
         <p>By: ${book.author}</p>
         <p>Pages: ${book.pages}</p>
         <p>Read: ${book.read}</p>
-        <button class="removeBtn" onclick="console.log(Array.from(this.parentElement.parentElement.children).indexOf(this))">Remove Book</button>
+        <button class="removeBtn" onclick="removeBook(Array.from(this.parentElement.parentElement).indexOf(this.parentElement
+        ))">Remove Book</button>
         `;
-        bookList.appendChild(newBook);
-    });
-    addBookDialog.close();
+    bookList.appendChild(newBook);
+  });
+  addBookDialog.close();
 }
 
-function removeBook(index) {   
-    myLibrary.splice(index, 1);
-    bookList.innerHTML = '';
-    myLibrary.map(book => { 
-        const newBook = document.createElement('div');
-        newBook.classList.add('book');
-        newBook.innerHTML = `<h3>${book.title}</h3> 
+function removeBook(index) {
+  myLibrary.splice(index, 1);
+  bookList.innerHTML = "";
+  myLibrary.map((book) => {
+    const newBook = document.createElement("div");
+    newBook.classList.add("book");
+    newBook.innerHTML = `<h3>${book.title}</h3> 
         <p>By: ${book.author}</p>
         <p>Pages: ${book.pages}</p>
         <p>Read: ${book.read}</p>
-        <button class="removeBtn" onclick="removeBook(this.parentElement.indexOf(this))">Remove Book</button>
+        <button class="removeBtn" onclick="removeBook(Array.from(this.parentElement.parentElement).indexOf(this.parentElement
+        ))">Remove Book</button>
         `;
-        bookList.appendChild(newBook);
-    });
+    bookList.appendChild(newBook);
+  });
 }
 
-button.addEventListener('click', () => {
-    const title = titleInput.value;
-    const author = authorInput.value;
-    const pages = pageCount.value;
-    const read = readStatus.value;
-    bookList.innerHTML = '';
-    addBookToLibrary(title,author,pages,read);
-    titleInput.value = '';
-    authorInput.value = '';
-    pageCount.value = '';
-    readStatus.value = '';
+button.addEventListener("click", () => {
+  const title = titleInput.value;
+  const author = authorInput.value;
+  const pages = pageCount.value;
+  const read = readStatus.value;
+  bookList.innerHTML = "";
+  addBookToLibrary(title, author, pages, read);
+  titleInput.value = "";
+  authorInput.value = "";
+  pageCount.value = "";
+  readStatus.value = "";
 });
 
-addNewBook.addEventListener('click', () => {
-    addBookDialog.showModal();
-}   );
+addNewBook.addEventListener("click", () => {
+  addBookDialog.showModal();
+});
