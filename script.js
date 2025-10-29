@@ -23,6 +23,22 @@ function Book(title, author, pages, read) {
   this.id = crypto.randomUUID();
 }
 
+function createBook() {
+    myLibrary.map((book) => {
+    const newBook = document.createElement("div");
+    newBook.classList.add("book");
+    newBook.innerHTML = `<h3>${book.title}</h3> 
+        <p>By: ${book.author}</p>
+        <p>Pages: ${book.pages}</p>
+        <button onclick="book.changeReadStatus()">Read: ${book.read}</button>
+        <button class="removeBtn" onclick="removeBook(Array.from(this.parentElement.parentElement).indexOf(this.parentElement
+        ))">Remove Book</button>
+        `;
+    bookList.appendChild(newBook);
+    });
+    return bookList;
+}
+
 function addBookToLibrary(title, author, pages, readStatus) {
   if (title === "" || author === "" || pages === "") {
     alert("Please enter all book information.");
@@ -56,7 +72,7 @@ function removeBook(index) {
     newBook.innerHTML = `<h3>${book.title}</h3> 
         <p>By: ${book.author}</p>
         <p>Pages: ${book.pages}</p>
-        <p>Read: ${book.read}</p>
+        <button onclick="book.changeReadStatus()">Read: ${book.read}</button>
         <button class="removeBtn" onclick="removeBook(Array.from(this.parentElement.parentElement).indexOf(this.parentElement
         ))">Remove Book</button>
         `;
@@ -80,3 +96,20 @@ button.addEventListener("click", () => {
 addNewBook.addEventListener("click", () => {
   addBookDialog.showModal();
 });
+
+Book.prototype.changeReadStatus = function () {
+  this.read = this.read === "Yes" ? "No" : "Yes";
+  bookList.innerHTML = "";
+  myLibrary.map((book) => {
+    const newBook = document.createElement("div");
+    newBook.classList.add("book");
+    newBook.innerHTML = `<h3>${book.title}</h3> 
+        <p>By: ${book.author}</p>
+        <p>Pages: ${book.pages}</p>
+        <button onclick="book.changeReadStatus()">Read: ${book.read}</button>
+        <button class="removeBtn" onclick="removeBook(Array.from(this.parentElement.parentElement).indexOf(this.parentElement
+        ))">Remove Book</button>
+        `;
+    bookList.appendChild(newBook);
+  });
+}
