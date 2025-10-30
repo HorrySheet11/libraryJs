@@ -10,23 +10,24 @@ html {
 body {
   margin: 0;
   padding: 10px;
-  background-color: #ebeef0;
+  background-color: #b7c5d3;
   text-align: center;
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   gap: 20px;
 }
-.library{
-    min-width:300px;
-    height: auto;
-    background-color:rgb(242, 241, 241);
-    border:none;
-    padding:20px;
-    border-radius:8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.library {
+  margin-top: 200px;
+  min-width: 300px;
+  height: auto;
+  background-color: rgb(242, 241, 241);
+  border: none;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .book {
@@ -40,10 +41,10 @@ body {
   align-items: center;
   gap: 5px;
   transition: transform 0.3s, box-shadow 0.3s;
-  p{
-    margin:0;
+  p {
+    margin: 0;
   }
-  padding:10px
+  padding: 10px;
 }
 
 #bookList {
@@ -55,7 +56,9 @@ body {
   justify-content: center;
 }
 
-input:not([type="radio"]), select, textarea {
+input:not([type="radio"]),
+select,
+textarea {
   font-family: inherit;
   padding: 3px;
   margin: 5px auto;
@@ -64,59 +67,74 @@ input:not([type="radio"]), select, textarea {
   border: 1px solid grey;
 }
 
-#addBookBtn, #addNewBook, .removeBtn, .readBtn{
-    padding:5px 40px;
-    font-size:16px;
-    font-family:inherit;
-    font-weight:bold;
-    border-radius:8px;
-    border:none;
-    background-color:#4CAF50;
-    color:white;
-    cursor:pointer;
-    margin:10px auto;
-    display:block
+#addBookBtn,
+#addNewBook,
+.removeBtn,
+.readBtn,#cancel {
+  padding: 5px 40px;
+  font-size: 16px;
+  font-family: inherit;
+  font-weight: bold;
+  border-radius: 10px;
+  border: none;
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+  margin: 10px auto;
+  display: block;
 }
 
-.removeBtn{
-    padding:5px 20px;
-    background-color:#f44336;
-    display:none;
-    transition: all 0.3s ease;
+#addNewBook {
+  background-color: #2196f3;
 }
 
-.read{
-  background-color:#4CAF50;
+.removeBtn {
+  padding: 5px 20px;
+  background-color: #f44336;
+  display: none;
+  transition: all 0.3s ease;
 }
 
-.notRead{
-  background-color:#f44336;
+.read {
+  background-color: #4caf50;
 }
 
-.book:hover{
-    height:auto;
-    .removeBtn{
-    display:block;
-    }
-} 
+.notRead,#cancel {
+  background-color: #f44336 !important;
+}
+
+.book:hover {
+  height: auto;
+  .removeBtn {
+    display: block;
+  }
+}
 
 dialog[open] {
   animation: fadeIn 0.2s ease-in forwards;
 }
 
-@keyframes fadeIn{
-  0%{
-    opacity:0;
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
   }
-  100%{
-    opacity:1;
+  100% {
+    opacity: 1;
   }
 }
 
-legend{
-    display:block;
+legend {
+  display: block;
 }
 
-.checkboxLabel{
-    display:inline;
+.checkboxLabel {
+  display: inline;
+}
+
+#addBookDialog{
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border:none;
 }

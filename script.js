@@ -9,7 +9,7 @@ const addBookDialog = document.getElementById("addBookDialog");
 const authorInput = document.getElementById("authorName");
 const titleInput = document.getElementById("bookName");
 const pageCount = document.getElementById("pageCount");
-let readRadio = '';
+let readRadio = "";
 
 if (bookList.innerHTML == "") {
   bookList.innerHTML = "<p>No books in library</p>";
@@ -24,7 +24,7 @@ function Book(title, author, pages, read) {
 }
 
 function thisIndex(theIndex) {
-  return Array.from(theIndex.parentElement.parentElement).indexOf(
+  return Array.from(theIndex.parentElement.parentElement.children).indexOf(
     theIndex.parentElement
   );
 }
@@ -39,14 +39,13 @@ function createBook() {
       <button class="readBtn ${
         book.read == "Yes" ? "read" : "notRead"
       }" onclick="changeReadStatus(thisIndex(this))">Read: ${book.read}</button>
-      <button class="removeBtn" onclick="console.log(thisIndex(this)); removeBook(thisIndex(this))">Remove Book</button>
+      <button class="removeBtn" onclick="removeBook(thisIndex(this))">Remove Book</button>
       `;
     bookList.appendChild(newBook);
   });
   if (bookList.innerHTML == "") {
     bookList.innerHTML = "<p>No books in library</p>";
   }
-  console.log(myLibrary);
   return bookList;
 }
 
@@ -55,7 +54,6 @@ function addBookToLibrary(title, author, pages, readStatus) {
     alert("Please enter all book information.");
     return;
   }
-  // readStatus.hasAttribute("checked") ? readStatus = "Yes" : readStatus = "No";
   const newBook = new Book(title, author, pages, readStatus);
   myLibrary.push(newBook);
   createBook();
@@ -67,33 +65,34 @@ function removeBook(index) {
   bookList.innerHTML = "";
   createBook();
 }
-let read = '';
+let read = "";
 button.addEventListener("click", () => {
   const title = titleInput.value;
   const author = authorInput.value;
   const pages = pageCount.value;
   if (!readRadio) {
-  alert('Please select a read status.');
-}
+    alert("Please select a read status.");
+    return;
+  }
   bookList.innerHTML = "";
   addBookToLibrary(title, author, pages, readRadio);
-  titleInput.value =
-    authorInput.value =
-    pageCount.value =
-    readRadio.value =
-      "";
+  titleInput.value = authorInput.value = pageCount.value = readRadio.value = "";
 });
 
 addNewBook.addEventListener("click", () => {
   addBookDialog.showModal();
 });
 
-function changeReadStatus(event, index) {
-  console.log(event.target.value);
-  console.log(myLibrary[index].read);
-  myLibrary[index].Book.read =
-    myLibrary[index].Book.read === "Yes" ? "No" : "Yes";
+function changeReadStatus(index) {
+  const newRead = myLibrary[index].read;
+  myLibrary[index].read = newRead == "Yes" ? "No" : "Yes";
   bookList.innerHTML = "";
   createBook();
 }
 
+function cancelForm() {
+  addBookDialog.close();
+  titleInput.value = authorInput.value = pageCount.value = "";
+  let unselect = document.querySelectorAll('input[type="radio"]');
+  unselect.forEach((radio) => (radio.checked = false));
+}
