@@ -17,10 +17,10 @@
         <label> Pages: <input type="number" id="pageCount" /></label>
         <legend>ReadStatus:</legend>
         <label class="checkboxLabel"
-          >Yes <input checked type="radio" id="readYes" name="ReadStatus" value="Yes"
+          >Yes <input onchange="readRadio = event.target.value" type="radio" id="readYes" name="ReadStatus" value="Yes"
         /></label>
         <label class="checkboxLabel"
-          >No <input type="radio" id="readNo" name="ReadStatus" value="No"
+          >No <input onchange="readRadio = event.target.value" type="radio" id="readNo" name="ReadStatus" value="No"
         /></label>
 
         <button id="addBookBtn">Add Book</button>
