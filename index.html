@@ -12,9 +12,9 @@
       <h1>My Library</h1>
       <button id="addNewBook">New Book</button>
       <dialog id="addBookDialog">
-        <label> Book Title: <input type="text" id="bookName" /></label>
-        <label> Book Author: <input type="text" id="authorName" /></label>
-        <label> Pages: <input type="number" id="pageCount" /></label>
+        <label> Book Title: <input required minlength="3" type="text" id="bookName" /></label>
+        <label> Book Author: <input required minlength="2" type="text" id="authorName" /></label>
+        <label> Pages: <input required minlength="1" type="number" id="pageCount" /></label>
         <legend>ReadStatus:</legend>
         <label class="checkboxLabel"
           >Yes <input onchange="readRadio = event.target.value" type="radio" id="readYes" name="ReadStatus" value="Yes"
